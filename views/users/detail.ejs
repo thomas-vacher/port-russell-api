@@ -1,0 +1,14 @@
+<%- include('../partials/header') %>
+
+<h1>Détail de l'utilisateur</h1>
+
+<p>Nom d'utilisateur : <strong><%= target.username %></strong></p>
+<p>Adresse e-mail : <%= target.email %></p>
+
+<p>
+  <a href="/dashboard/users/<%= encodeURIComponent(target.email) %>/edit">Modifier</a>
+  |
+  <a href="/dashboard/users">← Retour à la liste</a>
+</p>
+
+<%- include('../partials/footer') %>

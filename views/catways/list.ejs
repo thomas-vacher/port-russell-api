@@ -1,0 +1,59 @@
+<%- include('../partials/header') %>
+
+<h1>Catways</h1>
+
+<% if (locals.error) { %>
+  <p class="error"><%= error %></p>
+<% } %>
+
+<h2>Créer un catway</h2>
+<form action="/dashboard/catways" method="POST">
+  <label for="catwayNumber">Numéro</label>
+  <input type="number" id="catwayNumber" name="catwayNumber" min="1" required />
+
+  <label for="catwayType">Type</label>
+  <select id="catwayType" name="catwayType" required>
+    <option value="long">long</option>
+    <option value="short">short</option>
+  </select>
+
+  <label for="catwayState">État</label>
+  <input type="text" id="catwayState" name="catwayState" maxlength="500" required />
+
+  <button type="submit">Créer</button>
+</form>
+
+<h2>Liste des catways</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Numéro</th>
+      <th>Type</th>
+      <th>État</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% catways.forEach((catway) => { %>
+      <tr>
+        <td><%= catway.catwayNumber %></td>
+        <td><%= catway.catwayType %></td>
+        <td>
+          <form action="/dashboard/catways/<%= catway.catwayNumber %>/update" method="POST">
+            <input type="text" name="catwayState" value="<%= catway.catwayState %>" maxlength="500" required />
+            <button type="submit">Modifier</button>
+          </form>
+        </td>
+        <td>
+          <a href="/dashboard/catways/<%= catway.catwayNumber %>">Détails</a>
+          <form action="/dashboard/catways/<%= catway.catwayNumber %>/delete" method="POST"
+                onsubmit="return confirm('Supprimer ce catway ?');">
+            <button type="submit">Supprimer</button>
+          </form>
+        </td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
+
+<%- include('../partials/footer') %>

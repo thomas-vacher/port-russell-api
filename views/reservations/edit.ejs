@@ -1,0 +1,33 @@
+<%- include('../partials/header') %>
+
+<h1>Modifier la réservation</h1>
+
+<% if (locals.error) { %>
+  <p class="error"><%= error %></p>
+<% } %>
+
+<p>Catway : <strong><%= reservation.catwayNumber %></strong> (non modifiable)</p>
+
+<form action="/dashboard/reservations/<%= reservation._id %>/update" method="POST">
+  <label for="clientName">Nom du client</label>
+  <input type="text" id="clientName" name="clientName" maxlength="100"
+         value="<%= reservation.clientName %>" required />
+
+  <label for="boatName">Nom du bateau</label>
+  <input type="text" id="boatName" name="boatName" maxlength="100"
+         value="<%= reservation.boatName %>" required />
+
+  <label for="startDate">Date de début</label>
+  <input type="date" id="startDate" name="startDate"
+         value="<%= reservation.startDate.toISOString().slice(0, 10) %>" required />
+
+  <label for="endDate">Date de fin</label>
+  <input type="date" id="endDate" name="endDate"
+         value="<%= reservation.endDate.toISOString().slice(0, 10) %>" required />
+
+  <button type="submit">Enregistrer</button>
+</form>
+
+<p><a href="/dashboard/reservations">← Retour à la liste</a></p>
+
+<%- include('../partials/footer') %>

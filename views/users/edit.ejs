@@ -1,0 +1,24 @@
+<%- include('../partials/header') %>
+
+<h1>Modifier l'utilisateur</h1>
+
+<% if (locals.error) { %>
+  <p class="error"><%= error %></p>
+<% } %>
+
+<p>Adresse e-mail : <strong><%= target.email %></strong> (non modifiable)</p>
+
+<form action="/dashboard/users/<%= encodeURIComponent(target.email) %>/update" method="POST">
+  <label for="username">Nom d'utilisateur</label>
+  <input type="text" id="username" name="username" minlength="3" maxlength="50"
+         value="<%= target.username %>" required />
+
+  <label for="password">Nouveau mot de passe (laisser vide pour ne pas le changer)</label>
+  <input type="password" id="password" name="password" minlength="8" />
+
+  <button type="submit">Enregistrer</button>
+</form>
+
+<p><a href="/dashboard/users">← Retour à la liste</a></p>
+
+<%- include('../partials/footer') %>

@@ -1,0 +1,17 @@
+<%- include('../partials/header') %>
+
+<h1>Détail de la réservation</h1>
+
+<p>Catway : <strong><%= reservation.catwayNumber %></strong></p>
+<p>Client : <%= reservation.clientName %></p>
+<p>Bateau : <%= reservation.boatName %></p>
+<p>Début : <%= reservation.startDate.toLocaleDateString("fr-FR") %></p>
+<p>Fin : <%= reservation.endDate.toLocaleDateString("fr-FR") %></p>
+
+<p>
+  <a href="/dashboard/reservations/<%= reservation._id %>/edit">Modifier</a>
+  |
+  <a href="/dashboard/reservations">← Retour à la liste</a>
+</p>
+
+<%- include('../partials/footer') %>

@@ -1,0 +1,37 @@
+<%- include('../partials/header') %>
+
+<h1>Catway <%= catway.catwayNumber %></h1>
+
+<p>Type : <strong><%= catway.catwayType %></strong></p>
+<p>État : <%= catway.catwayState %></p>
+
+<h2>Réservations de ce catway</h2>
+
+<% if (reservations.length === 0) { %>
+  <p>Aucune réservation pour ce catway.</p>
+<% } else { %>
+  <table>
+    <thead>
+      <tr>
+        <th>Client</th>
+        <th>Bateau</th>
+        <th>Début</th>
+        <th>Fin</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% reservations.forEach((reservation) => { %>
+        <tr>
+          <td><%= reservation.clientName %></td>
+          <td><%= reservation.boatName %></td>
+          <td><%= reservation.startDate.toLocaleDateString("fr-FR") %></td>
+          <td><%= reservation.endDate.toLocaleDateString("fr-FR") %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+<% } %>
+
+<p><a href="/dashboard/catways">← Retour à la liste</a></p>
+
+<%- include('../partials/footer') %>

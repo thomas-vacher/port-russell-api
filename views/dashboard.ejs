@@ -1,0 +1,44 @@
+<%- include('partials/header') %>
+
+<h1>Tableau de bord</h1>
+
+<p>
+  Connecté : <strong><%= user.username %></strong> (<%= user.email %>)
+</p>
+<p>
+  Date du jour :
+  <%= today.toLocaleDateString("fr-FR", {
+    weekday: "long", day: "numeric", month: "long", year: "numeric"
+  }) %>
+</p>
+
+<h2>Réservations en cours</h2>
+
+<% if (reservations.length === 0) { %>
+  <p>Aucune réservation en cours.</p>
+<% } else { %>
+  <table>
+    <thead>
+      <tr>
+        <th>Catway</th>
+        <th>Client</th>
+        <th>Bateau</th>
+        <th>Début</th>
+        <th>Fin</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% reservations.forEach((reservation) => { %>
+        <tr>
+          <td><%= reservation.catwayNumber %></td>
+          <td><%= reservation.clientName %></td>
+          <td><%= reservation.boatName %></td>
+          <td><%= reservation.startDate.toLocaleDateString("fr-FR") %></td>
+          <td><%= reservation.endDate.toLocaleDateString("fr-FR") %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+<% } %>
+
+<%- include('partials/footer') %>
